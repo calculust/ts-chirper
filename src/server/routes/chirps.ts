@@ -14,9 +14,9 @@ router.get('/:id?', (req, res) => {
         res.json(chirpsService.GetChirp(id));
     } else {
         const data = chirpsService.GetChirps();
-        const chirps: IChirpDataArray[] = Object.keys(data).map(key => ({
+        const chirps = Object.keys(data).map(key => ({
             id: Number(key),
-            ...data[key]
+            ...data[Number(key)]
         }));
         chirps.pop()
         res.json(chirps);
