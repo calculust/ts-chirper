@@ -13,11 +13,11 @@ const CreateEdit = (props: CreateEditProps) => {
     const [chirpContent, setChirpContent] = useState('');
     const [chirpContentPlaceholder, setChirpContentPlaceholder] = useState('');
 
-    const handleUsernameChange = e => {
+    const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUsername(e.target.value);
     }
 
-    const handleChirpContentChange = e => {
+    const handleChirpContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setChirpContent(e.target.value);
     }
 
@@ -79,19 +79,20 @@ const CreateEdit = (props: CreateEditProps) => {
         }
     }
 
+    async function getChrip() {
+        try {
+            const res = await fetch('/api/chirps/' + id);
+            const chirpData = await res.json();
+            setChirp(chirpData);
+            setUsername(chirpData.name);
+            setChirpContent(chirpData.content);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
 	useEffect(() => {
 		if(props.isEdit) {
-            async function getChrip() {
-                try {
-                    const res = await fetch('/api/chirps/' + id);
-                    const chirpData = await res.json();
-                    setChirp(chirpData);
-                    setUsername(chirpData.name);
-                    setChirpContent(chirpData.content);
-                } catch (error) {
-                    console.log(error);
-                }
-            }
             getChrip();      
         }
 	}, []);
