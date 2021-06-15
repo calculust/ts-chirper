@@ -1,8 +1,10 @@
 import * as fs from 'fs';
 
 interface IChirp {
+    id?: number;
     name: string;
     content: string;
+    date: number;
 }
 
 interface IChirpData {

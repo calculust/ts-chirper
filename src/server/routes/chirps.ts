@@ -6,12 +6,18 @@ interface IChirpDataArray {
     id: number;
     name: string;
     content: string;
+    date: number;
 }
 
 router.get('/:id?', (req, res) => {
     let id: number = Number(req.params.id)
     if(id) {
-        res.json(chirpsService.GetChirp(id));
+        let chirpDTO = chirpsService.GetChirp(id);
+        if(!chirpDTO.name) {
+            res.json({ id, name: 'Error', content: 'Does Not Exist', date: Date.now() });
+        } else {
+            res.json(chirpDTO);
+        }
     } else {
         const data = chirpsService.GetChirps();
         const chirps = Object.keys(data).map(key => ({
