@@ -101,11 +101,11 @@ const CreateEdit = (props: CreateEditProps) => {
 		<div className="row justify-content-center">
             <div className="col-sm-4">
                 { props.isEdit ? <></> : <h3>What's happening?</h3> }
-                <textarea className="form-control mb-2" id="chirpContent" onChange={handleChirpContentChange} placeholder={chirpContentPlaceholder} value={chirpContent}></textarea>
+                <textarea className="form-control mb-2" id="chirpContent" onChange={handleChirpContentChange} placeholder={chirpContentPlaceholder} value={chirpContent} maxLength={140}></textarea>
                 <div className="d-flex justify-content-between">
                     <div className="input-group w-50">
                         <span className="input-group-text" id="basic-addon1">@</span>
-                        <input id="username" value={username} type="text" className="form-control" placeholder="Username" aria-label="Username" onChange={handleUsernameChange} />
+                        <input id="username" value={username} type="text" className="form-control" placeholder="Username" aria-label="Username" onChange={handleUsernameChange} maxLength={40} />
                     </div>
                     <Button variant="primary" onClick={handleChirp}>
                         { props.isEdit ? <>Edit</> : <>Chirp</> }
